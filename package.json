@@ -21,6 +21,7 @@
 	"homepage": "https://github.com/Ver0s/odin-todo-app#readme",
 	"devDependencies": {
 		"css-loader": "^6.7.1",
+		"html-loader": "^4.1.0",
 		"html-webpack-plugin": "^5.5.0",
 		"style-loader": "^3.3.1",
 		"webpack": "^5.74.0",
@@ -28,6 +29,7 @@
 		"webpack-dev-server": "^4.10.0"
 	},
 	"dependencies": {
-		"@formkit/auto-animate": "^1.0.0-beta.1"
+		"@formkit/auto-animate": "^1.0.0-beta.1",
+		"uuid": "^8.3.2"
 	}
 }
