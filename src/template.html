@@ -48,46 +48,19 @@
 			<div class="editor">
 				<div class="editor-header">
 					<h2 id="project-name">Home</h2>
+					<!-- might wanna not implement sorting, it might be too hard given project complexity -->
 					<div class="sort">
 						<span>Sort By</span>
-						<img src="./assets/icons/filter.svg" alt="sort" />
+						<img src="./assets/icons/sliders.svg" alt="sort" />
 					</div>
 				</div>
 				<ul class="todo-list">
-					<li id="add-task">
+					<li id="add-todo">
 						<img src="./assets/icons/plus.svg" alt="add task" />
 						<span>Add Task</span>
 					</li>
 				</ul>
 			</div>
 		</main>
-		<template id="todo-item-template">
-			<li class="todo-item">
-				<div class="check">
-					<input type="checkbox" />
-				</div>
-				<div class="todo-content">
-					<div class="todo-details">
-						<span id="title">Task 1 title</span>
-						<span id="description">Task 1 description</span>
-						<span id="priority">high</span>
-						<div class="due-date">
-							<img
-								src="./assets/icons/calendar.svg"
-								alt="task due date"
-							/>
-							<span id="due-date">10-11-2022</span>
-						</div>
-					</div>
-					<div class="todo-actions hidden">
-						<img src="./assets/icons/edit.svg" alt="edit task" />
-						<img
-							src="./assets/icons/trash-2.svg"
-							alt="delete task"
-						/>
-					</div>
-				</div>
-			</li>
-		</template>
 	</body>
 </html>
