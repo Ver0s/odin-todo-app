@@ -13,64 +13,14 @@
 	font-style: normal;
 }
 
-/*
-    ---------- RESET ----------
-    https://www.joshwcomeau.com/css/custom-css-reset/
-*/
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
-* {
-	margin: 0;
-	padding: 0;
-}
-html,
-body {
-	height: 100%;
-}
-body {
-	line-height: 1.5;
-	-webkit-font-smoothing: antialiased;
-}
-img,
-picture,
-video,
-canvas,
-svg {
-	display: block;
-	max-width: 100%;
-}
-input,
-button,
-textarea,
-select {
-	font: inherit;
-}
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	overflow-wrap: break-word;
-}
-#root,
-#__next {
-	isolation: isolate;
-}
-
-ol,
-ul {
-	list-style-type: none;
-}
-
 /* ---------- GENERAL ---------- */
 body {
 	font-family: 'Inter', sans-serif;
 	color: var(--main-text);
+}
+
+button {
+	cursor: pointer;
 }
 
 .hidden {
@@ -83,9 +33,35 @@ body {
 	--main-blue: #4d4db3;
 	--main-white: #fff;
 	--main-text: #202020;
-	--secondary-text: #808080;
+	--secondary-text: #696868;
 	--hover-color: #eeeeee;
 	--sidebar-color: #fafafa;
+}
+
+/* ---------- BUTTONS ---------- */
+.btn {
+	padding: 0.25rem 0.5rem;
+	background: none;
+	border: none;
+	border-radius: var(--border-radius);
+	font-weight: 700;
+	border-radius: 0.25rem;
+}
+
+.btn-primary {
+	background-color: var(--main-blue);
+	color: var(--main-white);
+}
+
+.btn-secondary {
+	background-color: var(--hover-color);
+	color: var(--main-text);
+}
+
+.btn-icon {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
 }
 
 /* ---------- HEADER ---------- */
@@ -156,7 +132,7 @@ main {
 	background-color: var(--hover-color);
 }
 
-/* EDITOR */
+/* ---------- EDITOR ---------- */
 .editor {
 	flex-grow: 1;
 	max-width: 900px;
@@ -173,25 +149,20 @@ main {
 	margin-bottom: 2rem;
 }
 
-#add-task,
-.sort {
-	cursor: pointer;
-	display: inline-flex;
-	gap: 0.5rem;
-}
-
 .due-date {
 	display: flex;
 	gap: 0.5rem;
 	font-size: 0.875rem;
 }
 
+/* EDITOR -> TODO ITEM */
+
 .todo-item {
 	display: flex;
 	gap: 1rem;
 	align-items: center;
 	padding-bottom: 0.5rem;
-	border-bottom: 0.5px solid lightgray;
+	border-bottom: 0.5px solid var(--hover-color);
 	margin-bottom: 0.5rem;
 	/* background-color: #764fd1; */
 }
@@ -212,9 +183,12 @@ main {
 	display: inline;
 }
 
-/* ADD TASK MODAL 
-.add-task-modal {
-	display: none;
+#description {
+	color: var(--secondary-text);
+}
+
+/* ---------- ADD TODO ---------- */
+.todo-modal {
 	position: fixed;
 	z-index: 1;
 	left: 0;
@@ -225,19 +199,57 @@ main {
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
-#addTask {
-	color: #fff;
+.todo-modal-content {
+	padding: 1.5rem;
 	display: flex;
 	flex-direction: column;
-	background-color: rgb(77, 77, 179);
-	width: clamp(250px, 25%, 400px);
+	max-width: 400px;
 	margin: 10% auto;
-	padding: 1.5rem;
-	gap: 0.8rem;
+	background-color: var(--main-white);
 	border-radius: var(--border-radius);
-} */
+}
 
-/* MEDIA QUERIES */
+.todo-modal-content select,
+.todo-modal-content input[type='date'] {
+	height: 32px;
+}
+
+.todo-modal-content textarea {
+	resize: vertical;
+}
+
+#add-todo-form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+
+.todo-modal-content h2 {
+	margin-bottom: 1rem;
+}
+
+.manage-form {
+	grid-column: 1/3;
+	justify-self: end;
+	margin-top: 1rem;
+}
+
+.manage-form button {
+	margin-left: 0.5rem;
+}
+
+.todo-form-input {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.todo-form-input:nth-child(1),
+.todo-form-input:nth-child(2) {
+	grid-column: 1/3;
+}
+
+/* ---------- MEDIA QUERIES ---------- */
 @media only screen and (max-width: 960px) {
 	.sidebar {
 		display: none;
