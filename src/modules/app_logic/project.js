@@ -1,19 +1,39 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const Project = (title, projectUUID = uuidv4()) => {
-	const todos = [];
-	// const addTodos = (...addedTodos) => {
-	// 	addedTodos.forEach((addedTodo) => todos.push(addedTodo));
-	// };
+const Project = (title, id = uuidv4()) => {
+	let todos = [];
+
+	// create function to getTodo with a specific id so like getTodo(todoUUID)
+	// TODO: make this function work
+	// create function to update specific todo
+	const getTodo = (todoID) => {
+		return todos.filter((todo) => todo.id === todoID);
+	};
 	const addTodo = (todo) => {
 		todos.push(todo);
 	};
-	const removeTodo = (todoIndex) => {
-		// get todo by its unique id and delete from todos
-		todos.splice(todoIndex, 1);
+	const deleteTodo = (todoID) => {
+		todos = todos.filter((todo) => todo.id !== todoID);
 	};
 
-	return { title, todos, addTodo, removeTodo, projectUUID };
+	return {
+		get title() {
+			return title;
+		},
+		set title(value) {
+			return (title = value);
+		},
+		get id() {
+			return id;
+		},
+		get todos() {
+			return todos;
+			// return [...todos];
+		},
+		addTodo,
+		deleteTodo,
+		getTodo,
+	};
 };
 
-export default Project;
+export { Project };
