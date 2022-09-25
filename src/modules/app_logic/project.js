@@ -1,14 +1,22 @@
 import { v4 as uuidv4 } from 'uuid';
+import { addProjectToDOM } from '../dom_creation/project-dom';
+import { getFormData } from './logic-utils';
 
 const Project = (title, id = uuidv4()) => {
 	let todos = [];
 
-	// create function to getTodo with a specific id so like getTodo(todoUUID)
-	// TODO: make this function work
-	// create function to update specific todo
 	const getTodo = (todoID) => {
 		return todos.filter((todo) => todo.id === todoID);
 	};
+	// const updateTodo = (todoID, updatedProp, updatedValue) => {
+	// 	const todoToUpdate = getTodo(todoID);
+	// 	todoToUpdate[updatedProp] = updatedValue;
+	// 	return todoToUpdate;
+	// };
+	// const addTodo = (title, description, priority, dueDate) => {
+	// 	const newTodo = Todo(title, description, priority, dueDate);
+	// 	todos.push(newTodo);
+	// };
 	const addTodo = (todo) => {
 		todos.push(todo);
 	};
@@ -33,7 +41,15 @@ const Project = (title, id = uuidv4()) => {
 		addTodo,
 		deleteTodo,
 		getTodo,
+		// updateTodo,
 	};
 };
 
-export { Project };
+const handleAddProject = (form) => {
+	const todoFormData = getFormData(form);
+	const newProject = Project(...todoFormData);
+	addProjectToDOM(newProject.title);
+	form.reset();
+};
+
+export { Project, handleAddProject };
