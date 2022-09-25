@@ -1,4 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
+import { getFormData } from './logic-utils';
+import { addTodoToDOM } from '../dom_creation/todo-dom';
+import { renderProjectTodos } from '../dom_creation/project-dom';
 
 const Todo = (title, description, priority, dueDate, id = uuidv4()) => {
 	let isDone = false;
@@ -40,4 +43,17 @@ const Todo = (title, description, priority, dueDate, id = uuidv4()) => {
 	};
 };
 
-export { Todo };
+const handleAddTodo = (form, project) => {
+	const todoFormData = getFormData(form);
+	const newTodo = Todo(...todoFormData);
+	project.addTodo(newTodo);
+	addTodoToDOM(newTodo);
+	form.reset();
+};
+
+const handleDeleteTodo = (todoID, project) => {
+	project.deleteTodo(todoID);
+	renderProjectTodos(project.todos);
+};
+
+export { Todo, handleAddTodo, handleDeleteTodo };
