@@ -23,6 +23,10 @@ button {
 	cursor: pointer;
 }
 
+button img {
+	pointer-events: none;
+}
+
 .hidden {
 	display: none;
 }
