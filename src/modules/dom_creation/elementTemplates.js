@@ -1,18 +1,22 @@
+import { createElement } from './dom-utils';
 import calendar from '../../assets/icons/calendar.svg';
 import edit from '../../assets/icons/edit.svg';
 import trash from '../../assets/icons/trash-2.svg';
 
-const todoTemplate = (todo) => {
-	return `
-    <li class="todo-item">
+// i can use object destructuring here to avoid repeating 'todo.'
+// something like that const todoTemplate = ({title, description, priority, dueDate}) => {}
+// rename todoTemplate to createTemplate or sth
+const renderTodo = (todo) => {
+	const template = `
+    <li class="todo-item" data-todo-id="${todo.id}">
         <div class="check">
-            <input type="checkbox" />
+            <input type="checkbox" data-todo-action="complete"/>
         </div>
         <div class="todo-content">
             <div class="todo-details">
-                <span id="title">${todo.title}</span>
-                <span id="description">${todo.description}</span>
-                <span id="priority">${todo.priority}</span>
+                <span class="todo-title">${todo.title}</span>
+                <span class="todo-description">${todo.description}</span>
+                <span class="todo-priority">${todo.priority}</span>
                 <div class="due-date">
                     <img
                         src=${calendar}
@@ -22,40 +26,27 @@ const todoTemplate = (todo) => {
                 </div>
             </div>
             <div class="todo-actions hidden">
-                <img src=${edit} />
-                <img
-                    src=${trash}
-                    alt="delete task"
-                />
+                <button class="btn btn-only-icon" data-todo-action="edit">
+                    <img src=${edit}/>   
+                </button>
+                <button class="btn btn-only-icon" data-todo-action="delete">
+                    <img
+                        src=${trash}
+                        alt="delete todo"
+                    />
+                </button>
             </div>
         </div>
     </li>
     `;
+	return createElement(template);
 };
 
-const addTodoTemplate = () => {
-	return `
-    <form id="add-todo-form">
-        <div class="add-todo-container">
-            <div class="title-desc">
-                <input type="text" placeholder="Task name" id="title">
-                <textarea placeholder="description" id="description"></textarea>
-            </div>
-            <div class="date-priority">
-                <input type="date" id="dueDate">
-                <select id="priority">
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
-                </select>
-            </div>
-        </div>
-        <div class="manage-form">
-            <button id="cancel-form">Cancel</button>
-            <button type="submit" id="add-todo-btn">Add Todo</butotn>
-        </div>
-    </form>
+const renderProjectLi = (projectTitle) => {
+	const template = `
+        <li>${projectTitle}</li>
     `;
+	return createElement(template);
 };
 
-export { todoTemplate, addTodoTemplate };
+export { renderTodo, renderProjectLi };
