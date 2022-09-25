@@ -21,46 +21,104 @@
 					<li>Home</li>
 					<li>Today</li>
 					<li>This Week</li>
-					<li>Done</li>
 				</ul>
 				<div class="projects">
 					<div class="projects-manage">
-						<div class="projects-expand">
+						<h3>Projects</h3>
+						<button id="add-project-btn" class="btn btn-only-icon">
 							<img
-								src="./assets/icons/chevron-down.svg"
-								alt="expand projects"
+								src="./assets/icons/plus.svg"
+								alt="add project"
 							/>
-							<h3>Projects</h3>
-						</div>
-						<img
-							src="./assets/icons/plus.svg"
-							alt="add project"
-							id="add-project"
-						/>
+						</button>
 					</div>
-					<ul class="projects-list">
-						<li>Project 1</li>
-						<li>Project 2</li>
-						<li>Project 3</li>
-					</ul>
+					<!-- move elements below elsewhere -->
+					<form id="add-project-form" class="hidden">
+						<input
+							type="text"
+							id="projectTitle"
+							name="projectTitle"
+							required
+						/>
+						<button class="btn btn-primary">Add Project</button>
+					</form>
+					<!-- move elements above elsewhere -->
+					<ul class="project-list"></ul>
 				</div>
 			</div>
 			<div class="editor">
 				<div class="editor-header">
-					<h2 id="project-name">Home</h2>
-					<!-- might wanna not implement sorting, it might be too hard given project complexity -->
-					<div class="sort">
-						<span>Sort By</span>
-						<img src="./assets/icons/sliders.svg" alt="sort" />
-					</div>
+					<h2 id="project-title">Home</h2>
+					<!-- change this add-todo ID because it conflicts with generated form ID -->
+					<button
+						id="add-todo-btn"
+						class="btn btn-secondary btn-text-icon"
+					>
+						Add Todo
+						<img
+							src="./assets/icons/plus.svg"
+							alt="add todo button"
+						/>
+					</button>
 				</div>
-				<ul class="todo-list">
-					<li id="add-todo">
-						<img src="./assets/icons/plus.svg" alt="add task" />
-						<span>Add Task</span>
-					</li>
-				</ul>
+				<ul class="todo-list"></ul>
 			</div>
 		</main>
+		<div class="todo-modal hidden">
+			<div class="todo-modal-content">
+				<h2>Add Todo</h2>
+				<form id="add-todo-form">
+					<div class="todo-form-input">
+						<label for="todoTitle">Title*</label>
+						<input
+							type="text"
+							id="todoTitle"
+							name="todoTitle"
+							required
+						/>
+					</div>
+					<div class="todo-form-input">
+						<label for="todoDescription">Description</label>
+						<textarea
+							id="todoDescription"
+							rows="3"
+							name="todoDescription"
+						></textarea>
+					</div>
+					<div class="todo-form-input">
+						<label for="todoPriority">Priority</label>
+						<select id="todoPriority" name="todoPriority">
+							<option value="high">High</option>
+							<option value="medium">Medium</option>
+							<option value="low">Low</option>
+						</select>
+					</div>
+					<div class="todo-form-input">
+						<label for="todoDueDate">Date</label>
+						<input
+							type="date"
+							id="todoDueDate"
+							name="todoDueDate"
+						/>
+					</div>
+					<div class="manage-form">
+						<button
+							type="button"
+							class="btn btn-secondary"
+							id="cancel-todo-form-btn"
+						>
+							Cancel
+						</button>
+						<button
+							type="submit"
+							class="btn btn-primary"
+							id="submit-todo-form-btn"
+						>
+							Add Todo
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</body>
 </html>
