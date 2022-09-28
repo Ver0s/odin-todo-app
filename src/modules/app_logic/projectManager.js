@@ -1,9 +1,17 @@
 const projectManager = (() => {
 	let projects = [];
 	let currentProject;
-	// maybe add function to set current project
+
+	const _getProjectIndex = (projectID) => {
+		return projects.findIndex((project) => {
+			return project.id === projectID;
+		});
+	};
+
 	const getProject = (projectID) => {
-		return projects.filter((project) => project.id === projectID);
+		// const filtered = projects.filter((project) => project.id === projectID);
+		// return Object.assign({}, ...filtered);
+		return projects[_getProjectIndex(projectID)];
 	};
 
 	const addProject = (project) => {
@@ -11,7 +19,7 @@ const projectManager = (() => {
 	};
 
 	const deleteProject = (projectID) => {
-		projects = projects.filter((project) => project.id !== projectID);
+		projects.splice(_getProjectIndex(projectID), 1);
 	};
 
 	return {
