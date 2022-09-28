@@ -13,15 +13,17 @@ const Project = (title, id = uuidv4()) => {
 	const getTodo = (todoID) => {
 		return todos.filter((todo) => todo.id === todoID);
 	};
-	// const updateTodo = (todoID, updatedProp, updatedValue) => {
-	// 	const todoToUpdate = getTodo(todoID);
-	// 	todoToUpdate[updatedProp] = updatedValue;
-	// 	return todoToUpdate;
-	// };
-	// const addTodo = (title, description, priority, dueDate) => {
-	// 	const newTodo = Todo(title, description, priority, dueDate);
-	// 	todos.push(newTodo);
-	// };
+
+	const updateTodo = (todoID, formData) => {
+		const todoToUpdate = getTodo(todoID);
+		const updatedTodoKeys = Object.keys(formData);
+		const updatedTodoValues = Object.values(formData);
+
+		updatedTodoKeys.forEach((keyToUpdate, index) => {
+			todoToUpdate[keyToUpdate] = updatedTodoValues[index];
+		});
+	};
+
 	const addTodo = (todo) => {
 		todos.push(todo);
 	};
