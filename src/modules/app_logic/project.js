@@ -5,6 +5,11 @@ import { getFormData } from './logic-utils';
 const Project = (title, id = uuidv4()) => {
 	let todos = [];
 
+	const _getTodoIndex = (todoID) => {
+		return todos.findIndex((todo) => {
+			return todo.id === todoID;
+		});
+	};
 	const getTodo = (todoID) => {
 		return todos.filter((todo) => todo.id === todoID);
 	};
