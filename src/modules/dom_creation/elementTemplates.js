@@ -3,9 +3,6 @@ import calendar from '../../assets/icons/calendar.svg';
 import edit from '../../assets/icons/edit.svg';
 import trash from '../../assets/icons/trash-2.svg';
 
-// i can use object destructuring here to avoid repeating 'todo.'
-// something like that const todoTemplate = ({title, description, priority, dueDate}) => {}
-// rename todoTemplate to createTemplate or sth
 const renderTodo = (todo) => {
 	const template = `
     <li class="todo-item" data-todo-id="${todo.id}">
@@ -42,11 +39,175 @@ const renderTodo = (todo) => {
 	return createElement(template);
 };
 
-const renderProjectLi = (projectTitle) => {
+const renderProjectLi = (project) => {
 	const template = `
-        <li>${projectTitle}</li>
+        <li class="project-item" data-project-id="${project.id}">${project.title}</li>
     `;
 	return createElement(template);
 };
 
-export { renderTodo, renderProjectLi };
+const addTodoForm = () => {
+	const template = `
+    <div class="modal-content">
+        <h2>Add Todo</h2>
+        <form id="add-todo-form" class="todo-form">
+            <div class="form-input">
+                <label for="title">Title*</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    required
+                />
+            </div>
+            <div class="form-input">
+                <label for="description">Description</label>
+                <textarea
+                    id="description"
+                    rows="3"
+                    name="description"
+                ></textarea>
+            </div>
+            <div class="form-input">
+                <label for="priority">Priority</label>
+                <select id="priority" name="priority">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div class="form-input">
+                <label for="dueDate">Date</label>
+                <input
+                    type="date"
+                    id="dueDate"
+                    name="dueDate"
+                />
+            </div>
+            <div class="manage-form">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="cancel-form-btn"
+                >
+                    Cancel
+                </button>
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="submit-todo-form-btn"
+                >
+                    Add Todo
+                </button>
+            </div>
+        </form>
+    </div>
+    `;
+	return createElement(template);
+};
+
+const editTodoForm = (todo) => {
+	const template = `
+    <div class="modal-content">
+        <h2>Edit Todo</h2>
+        <form id="edit-todo-form" class="todo-form">
+            <div class="form-input">
+                <label for="title">Title*</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    required
+                    value="${todo.title}"
+                />
+            </div>
+            <div class="form-input">
+                <label for="description">Description</label>
+                <textarea
+                    id="description"
+                    rows="3"
+                    name="description"
+                >${todo.description}</textarea>
+            </div>
+            <div class="form-input">
+                <label for="priority">Priority</label>
+                <select id="priority" name="priority">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div class="form-input">
+                <label for="dueDate">Date</label>
+                <input
+                    type="date"
+                    id="dueDate"
+                    name="dueDate"
+                    value="${todo.dueDate}"
+                />
+            </div>
+            <div class="manage-form">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="cancel-form-btn"
+                >
+                    Cancel
+                </button>
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="submit-todo-form-btn"
+                >
+                    Edit Todo
+                </button>
+            </div>
+        </form>
+    </div>
+    `;
+	return createElement(template);
+};
+
+const addProjectForm = () => {
+	const template = `
+    <div class="modal-content">
+        <h2>Add Project</h2>
+        <form id="add-project-form" class="project-form">
+            <div class="form-input">
+                <label for="title">Title</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    required
+                />
+            </div>
+            <div class="manage-project-form">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="cancel-form-btn"
+                >
+                    Cancel
+                </button>
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="submit-project-form-btn"
+                >
+                    Add Project
+                </button>
+            </div>
+        </form>
+    </div>
+    `;
+	return createElement(template);
+};
+
+export {
+	renderTodo,
+	renderProjectLi,
+	addTodoForm,
+	editTodoForm,
+	addProjectForm,
+};
