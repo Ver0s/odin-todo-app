@@ -11,7 +11,7 @@ const Project = (title, id = uuidv4()) => {
 		});
 	};
 	const getTodo = (todoID) => {
-		return todos.filter((todo) => todo.id === todoID);
+		return todos[_getTodoIndex(todoID)];
 	};
 
 	const updateTodo = (todoID, formData) => {
@@ -28,7 +28,7 @@ const Project = (title, id = uuidv4()) => {
 		todos.push(todo);
 	};
 	const deleteTodo = (todoID) => {
-		todos = todos.filter((todo) => todo.id !== todoID);
+		todos.splice(_getTodoIndex(todoID), 1);
 	};
 
 	return {
