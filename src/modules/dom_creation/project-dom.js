@@ -1,26 +1,33 @@
-import { renderProjectLi } from './elementTemplates';
-import { renderTodo } from './elementTemplates';
-
-const renderProjectTodos = (projectTodos) => {
-	const todoList = document.querySelector('.todo-list');
-	// move replaceChildren this to another function later
-	// show empty state
-	todoList.replaceChildren();
-	projectTodos.forEach((todo) => {
-		const todoElement = renderTodo(todo);
-		todoList.appendChild(todoElement);
-	});
-};
+import { renderProjectLi } from './element-templates';
+import { attachEventLitenersToProject } from './event-listeners';
 
 const setProjectHeader = (projectName) => {
 	const projectTitle = document.querySelector('#project-title');
 	projectTitle.textContent = projectName;
 };
 
-const addProjectToDOM = (projectTitle) => {
+// const addProjectToDOM = (project) => {
+// 	const projectList = document.querySelector('.project-list');
+// 	const projectLiElement = renderProjectLi(project);
+// 	attachEventLitenersToProject(projectLiElement);
+// 	projectList.appendChild(projectLiElement);
+// };
+
+const renderProjects = (projects) => {
 	const projectList = document.querySelector('.project-list');
-	const projectLiElement = renderProjectLi(projectTitle);
-	projectList.appendChild(projectLiElement);
+	// Condition is set to 1 here because of Home project
+	if (projects.length === 1) {
+		projectList.textContent = "You don't have any projects yet.";
+	} else {
+		projectList.replaceChildren();
+		projects.forEach((project) => {
+			// Prevent default project from appearing in unwanted place
+			if (project.title === 'Home') return;
+			const projectLi = renderProjectLi(project);
+			attachEventLitenersToProject(projectLi);
+			projectList.appendChild(projectLi);
+		});
+	}
 };
 
-export { renderProjectTodos, setProjectHeader, addProjectToDOM };
+export { setProjectHeader, renderProjects };
