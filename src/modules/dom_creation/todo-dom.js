@@ -1,67 +1,46 @@
-import { showElement, hideElement, showModal, hideModal } from './dom-utils';
+import { showModal } from './dom-utils';
+import { todoItem, addTodoForm } from './element-templates';
 import {
-	handleAddTodo,
-	handleDeleteTodo,
-	handleEditTodo,
-} from '../app_logic/todo';
-import { renderTodo, addTodoForm, editTodoForm } from './elementTemplates';
-import { projectManager } from '../app_logic/projectManager';
+	attachEventLitenersToAddTodoForm,
+	attachEventLitenersToTodo,
+} from './event-listeners';
 
-// SELECTORS
+// ELEMENTS FROM HTML TEMPLATE
 const addTodoBtn = document.querySelector('#add-todo-btn');
-// const cancelTodoForm = document.querySelector('#cancel-todo-form-btn');
-// const addTodoForm = document.querySelector('#add-todo-form');
 
 // FUNCTIONS
-const addTodoToDOM = (todo) => {
+const checkForTodoDone = (todo, todoElement) => {
+	if (todo.isDone) {
+		// add todo done class to todo content not todoli
+		const todoContent = todoElement.querySelector('.todo-content');
+		const completeTodo = todoElement.querySelector(
+			'[data-todo-action="complete"]'
+		);
+		todoContent.classList.add('todo-done');
+		completeTodo.checked = true;
+	}
+};
+
+const renderTodos = (projectTodos) => {
 	const todoList = document.querySelector('.todo-list');
-	todoList.appendChild(renderTodo(todo));
+	if (projectTodos.length === 0) {
+		todoList.textContent = "You don't have any todos in this project yet.";
+	} else {
+		todoList.replaceChildren();
+		projectTodos.forEach((todo) => {
+			const todoElement = todoItem(todo);
+			checkForTodoDone(todo, todoElement);
+			attachEventLitenersToTodo(todoElement);
+			todoList.appendChild(todoElement);
+		});
+	}
 };
 
 // EVENT LISTENERS
 addTodoBtn.addEventListener('click', () => {
-	showModal(addTodoForm());
+	const addTodoFormElement = addTodoForm();
+	attachEventLitenersToAddTodoForm(addTodoFormElement);
+	showModal(addTodoFormElement);
 });
 
-document.addEventListener('submit', (e) => {
-	e.preventDefault();
-	const target = e.target;
-	if (target.id === 'add-todo-form') {
-		handleAddTodo(target, projectManager.currentProject);
-		hideModal();
-	}
-	if (target.id === 'edit-todo-form') {
-		hideModal();
-	}
-});
-
-document.addEventListener('click', (e) => {
-	const target = e.target;
-	if (target.id === 'cancel-todo-form-btn') {
-		hideModal();
-	}
-});
-
-// cancelTodoForm.addEventListener('click', () => {
-// 	hideElement(addTodoModal);
-// });
-
-// addTodoForm.addEventListener('submit', (e) => {
-// 	e.preventDefault();
-// 	handleAddTodo(e.target, projectManager.currentProject);
-// 	hideElement(addTodoModal);
-// });
-
-document.addEventListener('click', (e) => {
-	const target = e.target;
-	if (target.dataset.todoAction === 'delete') {
-		const todoID = target.closest('.todo-item').dataset.todoId;
-		handleDeleteTodo(todoID, projectManager.currentProject);
-	}
-	if (target.dataset.todoAction === 'edit') {
-		const todoID = target.closest('.todo-item').dataset.todoId;
-		showModal(editTodoForm(projectManager.currentProject.getTodo(todoID)));
-	}
-});
-
-export { addTodoToDOM };
+export { renderTodos };

@@ -1,37 +1,39 @@
-import { showElement, hideElement, showModal, hideModal } from './dom-utils';
-import { handleAddProject } from '../app_logic/project';
-import { setProjectHeader, renderProjectTodos } from './project-dom';
-import { projectManager } from '../app_logic/projectManager';
-import { addProjectForm } from './elementTemplates';
+import { showModal } from './dom-utils';
+import { setProjectHeader } from './project-dom';
+import { renderTodos } from './todo-dom';
+import { projectManager } from '../app_logic/project-manager';
+import { addProjectForm } from './element-templates';
+import { attachEventLitenersToAddProjectForm } from './event-listeners';
 
-const addProjectBtn = document.querySelector('#add-project-btn');
+// ELEMENTS FROM HTML TEMPLATE
 const toggleSidebarBtn = document.querySelector('#toggle-sidebar-btn');
+const addProjectBtn = document.querySelector('#add-project-btn');
+const defaultProjectLi = document.querySelector('#default-project');
+const todayTodosBtn = document.querySelector('#today-todos');
+const thisWeekTodosBtn = document.querySelector('#this-week-todos');
+
+// FUNCTIONS
+const handleProjectsNavigation = (projectID) => {
+	projectManager.currentProject = projectManager.getProject(projectID);
+	setProjectHeader(projectManager.currentProject.title);
+	renderTodos(projectManager.currentProject.todos);
+};
+
+// EVENT LISTENERS
+defaultProjectLi.addEventListener('click', () => {
+	const projectID = defaultProjectLi.dataset.projectId;
+	handleProjectsNavigation(projectID);
+});
 
 toggleSidebarBtn.addEventListener('click', () => {
 	const sidebar = document.querySelector('.sidebar');
 	sidebar.classList.toggle('hidden');
 });
 
-document.addEventListener('submit', (e) => {
-	e.preventDefault();
-	handleAddProject(e.target);
-	hideModal();
+addProjectBtn.addEventListener('click', () => {
+	const addProjectFormElement = addProjectForm();
+	attachEventLitenersToAddProjectForm(addProjectFormElement);
+	showModal(addProjectFormElement);
 });
 
-// Project navigation
-document.addEventListener('click', (e) => {
-	const target = e.target;
-	if (target.id === 'add-project-btn') {
-		showModal(addProjectForm());
-	}
-	if (target.className === 'project-item') {
-		// MOVE ALL OF THE ABOVE INTO SEPERATE FUNCTION
-		const projectID = target.closest('.project-item').dataset.projectId;
-		// change current project
-		projectManager.currentProject = projectManager.getProject(projectID);
-		// setProjectHeader
-		setProjectHeader(projectManager.currentProject.title);
-		// renderProjectTodos
-		renderProjectTodos(projectManager.currentProject.todos);
-	}
-});
+export { handleProjectsNavigation };
