@@ -285,6 +285,10 @@ main {
 	}
 }
 
-.task-done {
-	background-color: gray;
+.todo-done {
+	background-color: rgb(190, 190, 190);
+}
+
+.todo-done span {
+	text-decoration: line-through;
 }
