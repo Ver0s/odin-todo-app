@@ -10,4 +10,16 @@ const hideElement = (el) => {
 	el.classList.add('hidden');
 };
 
-export { createElement, showElement, hideElement };
+const showModal = (form) => {
+	const modal = document.querySelector('.modal');
+	modal.classList.remove('hidden');
+	modal.appendChild(form);
+};
+
+const hideModal = () => {
+	const modalMain = document.querySelector('.modal');
+	modalMain.classList.add('hidden');
+	modalMain.firstElementChild.remove();
+};
+
+export { createElement, showElement, hideElement, showModal, hideModal };
