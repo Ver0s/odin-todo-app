@@ -136,6 +136,20 @@ main {
 	margin-bottom: 0.25rem;
 }
 
+/* ---------- SIDEBAR -> PROJECT ITEM ---------- */
+.manage-project {
+	display: flex;
+	align-items: center;
+}
+
+.project-name {
+	flex: 1;
+}
+
+.project-item:hover button {
+	display: block;
+}
+
 /* ---------- EDITOR ---------- */
 .editor {
 	flex-grow: 1;
@@ -159,7 +173,7 @@ main {
 	font-size: 0.875rem;
 }
 
-/* EDITOR -> TODO ITEM */
+/* ---------- EDITOR -> TODO ITEM ---------- */
 
 .todo-item {
 	display: flex;
