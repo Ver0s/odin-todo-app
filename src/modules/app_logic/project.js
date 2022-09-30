@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
-import { addProjectToDOM } from '../dom_creation/project-dom';
+import { renderProjects } from '../dom_creation/project-dom';
 import { getFormData } from './logic-utils';
+import { projectManager } from './project-manager';
+import { handleProjectsNavigation } from '../dom_creation/sidebar-dom';
 
 const Project = (title, id = uuidv4()) => {
 	let todos = [];
@@ -10,6 +12,7 @@ const Project = (title, id = uuidv4()) => {
 			return todo.id === todoID;
 		});
 	};
+
 	const getTodo = (todoID) => {
 		return todos[_getTodoIndex(todoID)];
 	};
@@ -18,7 +21,6 @@ const Project = (title, id = uuidv4()) => {
 		const todoToUpdate = getTodo(todoID);
 		const updatedTodoKeys = Object.keys(formData);
 		const updatedTodoValues = Object.values(formData);
-
 		updatedTodoKeys.forEach((keyToUpdate, index) => {
 			todoToUpdate[keyToUpdate] = updatedTodoValues[index];
 		});
@@ -27,6 +29,7 @@ const Project = (title, id = uuidv4()) => {
 	const addTodo = (todo) => {
 		todos.push(todo);
 	};
+
 	const deleteTodo = (todoID) => {
 		todos.splice(_getTodoIndex(todoID), 1);
 	};
@@ -43,20 +46,29 @@ const Project = (title, id = uuidv4()) => {
 		},
 		get todos() {
 			return todos;
-			// return [...todos];
 		},
 		addTodo,
 		deleteTodo,
 		getTodo,
-		// updateTodo,
+		updateTodo,
 	};
 };
 
 const handleAddProject = (form) => {
 	const todoFormData = getFormData(form);
-	const newProject = Project(...todoFormData);
-	addProjectToDOM(newProject.title);
+	const newProject = Project(...Object.values(todoFormData));
+	projectManager.addProject(newProject);
+	renderProjects(projectManager.projects);
+	handleProjectsNavigation(newProject.id);
 	form.reset();
 };
 
-export { Project, handleAddProject };
+const handleDeleteProject = (projectID) => {
+	projectManager.deleteProject(projectID);
+	renderProjects(projectManager.projects);
+	handleProjectsNavigation(
+		document.querySelector('#default-project').dataset.projectId
+	);
+};
+
+export { Project, handleAddProject, handleDeleteProject };
