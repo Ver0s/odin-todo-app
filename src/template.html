@@ -16,8 +16,9 @@
 		<main>
 			<div class="sidebar">
 				<ul class="main-filters">
-					<li>Today</li>
-					<li>This Week</li>
+					<li id="default-project"></li>
+					<li id="today-todos">Today</li>
+					<li id="this-week-todos">This Week</li>
 				</ul>
 				<div class="projects">
 					<div class="projects-manage">
@@ -34,7 +35,7 @@
 			</div>
 			<div class="editor">
 				<div class="editor-header">
-					<h2 id="project-title">Home</h2>
+					<h2 id="project-title"></h2>
 					<button
 						id="add-todo-btn"
 						class="btn btn-secondary btn-text-icon"
