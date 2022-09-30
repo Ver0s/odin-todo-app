@@ -217,25 +217,4 @@ const addProjectForm = () => {
 	return createElement(template);
 };
 
-const editor = (project) => {
-	const template = `
-    <div class="editor">
-        <div class="editor-header">
-            <h2 id="project-title">${project.title}</h2>
-            <button
-                id="add-todo-btn"
-                class="btn btn-secondary btn-text-icon"
-            >
-                Add Todo
-                <img
-                    src="./assets/icons/plus.svg"
-                    alt="add todo button"
-                />
-            </button>
-        </div>
-        <ul class="todo-list"></ul>
-    </div>
-    `;
-};
-
 export { todoItem, renderProjectLi, addTodoForm, editTodoForm, addProjectForm };
