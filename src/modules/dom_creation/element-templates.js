@@ -2,27 +2,43 @@ import { createElement } from './dom-utils';
 import calendar from '../../assets/icons/calendar.svg';
 import edit from '../../assets/icons/edit.svg';
 import trash from '../../assets/icons/trash-2.svg';
+import { setPriorityColor } from './todo-dom';
+import parseISO from 'date-fns/parseISO';
 
 const todoItem = (todo) => {
 	const template = `
     <li class="todo-item" data-todo-id="${todo.id}">
         <div class="check">
-            <input type="checkbox" data-todo-action="complete"/>
+            <div class="round">
+                <input type="checkbox" id="checkbox-${
+					todo.id
+				}" data-todo-action="complete"/>
+                <label for="checkbox-${
+					todo.id
+				}" style="border-color: ${setPriorityColor(
+		todo.priority
+	)}"></label>
+            </div>
         </div>
         <div class="todo-content">
             <div class="todo-details">
-                <span class="todo-title">${todo.title}</span>
-                <span class="todo-description">${todo.description}</span>
-                <span class="todo-priority">${todo.priority}</span>
+                <div class="todo-text">
+                    <p class="todo-title">${todo.title}</p>
+                    <p class="todo-description">${todo.description}</p>
+                </div>
                 <div class="due-date">
                     <img
                         src=${calendar}
                         alt="task due date"
                     />
-                    <span id="due-date">${todo.dueDate}</span>
+                    <span class="todo-due-date">${
+						!todo.dueDate
+							? 'No due date set'
+							: parseISO(todo.dueDate).toDateString()
+					}</span>
                 </div>
             </div>
-            <div class="todo-actions hidden">
+            <div class="todo-actions visibility-hidden">
                 <button class="btn btn-only-icon" data-todo-action="edit">
                     <img 
                         src=${edit}
@@ -145,9 +161,15 @@ const editTodoForm = (todo) => {
             <div class="form-input">
                 <label for="priority">Priority</label>
                 <select id="priority" name="priority">
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
+                    <option value="high" ${
+						todo.priority === 'high' && 'selected'
+					}>High</option>
+                    <option value="medium" ${
+						todo.priority === 'medium' && 'selected'
+					}>Medium</option>
+                    <option value="low" ${
+						todo.priority === 'low' && 'selected'
+					}>Low</option>
                 </select>
             </div>
             <div class="form-input">
@@ -192,6 +214,7 @@ const addProjectForm = () => {
                     type="text"
                     id="title"
                     name="title"
+                    maxlength="30"
                     required
                 />
             </div>
