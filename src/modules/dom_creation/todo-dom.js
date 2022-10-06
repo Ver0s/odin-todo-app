@@ -4,6 +4,7 @@ import {
 	attachEventLitenersToAddTodoForm,
 	attachEventLitenersToTodo,
 } from './event-listeners';
+import { isTodoInPast } from '../app_logic/logic-utils';
 
 // ELEMENTS FROM HTML TEMPLATE
 const addTodoBtn = document.querySelector('#add-todo-btn');
@@ -21,6 +22,13 @@ const checkForTodoDone = (todo, todoElement) => {
 	}
 };
 
+const markPastTodo = (todo, todoElement) => {
+	if (isTodoInPast(todo.dueDate)) {
+		const dateElement = todoElement.querySelector('.todo-due-date');
+		dateElement.style.color = 'red';
+	}
+};
+
 const renderTodos = (projectTodos) => {
 	const todoList = document.querySelector('.todo-list');
 	if (projectTodos.length === 0) {
@@ -30,9 +38,23 @@ const renderTodos = (projectTodos) => {
 		projectTodos.forEach((todo) => {
 			const todoElement = todoItem(todo);
 			checkForTodoDone(todo, todoElement);
+			markPastTodo(todo, todoElement);
 			attachEventLitenersToTodo(todoElement);
 			todoList.appendChild(todoElement);
 		});
+	}
+};
+
+const setPriorityColor = (priority) => {
+	switch (priority) {
+		case 'high':
+			return 'red';
+		case 'medium':
+			return 'orange';
+		case 'low':
+			return 'green';
+		default:
+			break;
 	}
 };
 
@@ -43,4 +65,4 @@ addTodoBtn.addEventListener('click', () => {
 	showModal(addTodoFormElement);
 });
 
-export { renderTodos };
+export { renderTodos, setPriorityColor };
