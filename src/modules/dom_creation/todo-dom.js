@@ -25,7 +25,7 @@ const checkForTodoDone = (todo, todoElement) => {
 const markPastTodo = (todo, todoElement) => {
 	if (isTodoInPast(todo.dueDate)) {
 		const dateElement = todoElement.querySelector('.todo-due-date');
-		dateElement.style.color = 'red';
+		dateElement.style.color = '#cb3c34';
 	}
 };
 
