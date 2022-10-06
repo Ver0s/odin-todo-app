@@ -2,18 +2,16 @@ const createElement = (template) => {
 	return document.createRange().createContextualFragment(template);
 };
 
-const showElement = (el) => {
-	el.classList.remove('hidden');
-};
-
-const hideElement = (el) => {
-	el.classList.add('hidden');
+const focusOnFirstInput = (formElement) => {
+	const firstInput = formElement.querySelector('input:first-of-type');
+	firstInput.focus();
 };
 
 const showModal = (form) => {
 	const modal = document.querySelector('.modal');
 	modal.classList.remove('hidden');
 	modal.appendChild(form);
+	focusOnFirstInput(modal.querySelector('form'));
 };
 
 const hideModal = () => {
@@ -22,4 +20,4 @@ const hideModal = () => {
 	modalMain.firstElementChild.remove();
 };
 
-export { createElement, showElement, hideElement, showModal, hideModal };
+export { createElement, showModal, hideModal, focusOnFirstInput };
