@@ -13,9 +13,7 @@ const todoItem = (todo) => {
                 <input type="checkbox" id="checkbox-${
 					todo.id
 				}" data-todo-action="complete"/>
-                <label for="checkbox-${
-					todo.id
-				}" style="border-color: ${setPriorityColor(
+                <label for="checkbox-${todo.id}" class="${setPriorityColor(
 		todo.priority
 	)}"></label>
             </div>
