@@ -30,6 +30,12 @@ const Project = (title, id = uuidv4()) => {
 		todos.push(todo);
 	};
 
+	const addMultipleTodos = (todosArr) => {
+		todosArr.forEach((todo) => {
+			todos.push(todo);
+		});
+	};
+
 	const deleteTodo = (todoID) => {
 		todos.splice(_getTodoIndex(todoID), 1);
 	};
@@ -51,6 +57,7 @@ const Project = (title, id = uuidv4()) => {
 		deleteTodo,
 		getTodo,
 		updateTodo,
+		addMultipleTodos,
 	};
 };
 
