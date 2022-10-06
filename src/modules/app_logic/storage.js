@@ -1,7 +1,7 @@
 import { projectManager } from './project-manager';
 import { Project } from './project';
 import { Todo } from './todo';
-import { setupDefaultProject } from '../..';
+import { setupDefaultProject } from './init-functions';
 
 const populateStorage = (key, obj) => {
 	localStorage.setItem(key, JSON.stringify(obj));
