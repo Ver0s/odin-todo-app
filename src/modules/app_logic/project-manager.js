@@ -24,6 +24,13 @@ const projectManager = (() => {
 		get projects() {
 			return projects;
 		},
+		get allProjectsTodos() {
+			const allTodos = [];
+			projects.forEach((project) => {
+				allTodos.push(...project.todos);
+			});
+			return allTodos;
+		},
 		get currentProject() {
 			return currentProject;
 		},
