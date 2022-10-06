@@ -4,8 +4,7 @@ import parseISO from 'date-fns/parseISO';
 import endOfDay from 'date-fns/endOfDay';
 import isPast from 'date-fns/isPast';
 
-// const today = new Date(Date.now());
-// console.log(today.toDateString())
+// const today = new Date().toDateString();
 
 const getTodayTodos = (todos) => {
 	return todos.filter((todo) => isToday(parseISO(todo.dueDate)));
