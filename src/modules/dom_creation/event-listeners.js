@@ -8,6 +8,7 @@ import {
 import { handleAddProject, handleDeleteProject } from '../app_logic/project';
 import { editTodoForm } from './element-templates';
 import { handleProjectsNavigation } from './sidebar-dom';
+import { populateStorage } from '../app_logic/storage';
 
 // These event listeners are for dynamically generated items
 // Event listeners for items statically placed in HTML are in appropriate -dom.js files
@@ -36,12 +37,16 @@ const attachEventLitenersToTodo = (todoElement) => {
 	// click for delete todo
 	deleteTodoBtn.addEventListener('click', () => {
 		handleDeleteTodo(todoID, projectManager.currentProject);
+		populateStorage('projects', projectManager.projects);
 	});
 
 	// click for setting todo as complete
 	completeTodo.addEventListener('change', () => {
 		currentTodo.toggleDone();
 		todoContent.classList.toggle('todo-done');
+		populateStorage('projects', projectManager.projects);
+		// deleteTodoBtn.disabled = !deleteTodoBtn.disabled;
+		// editTodoBtn.disabled = !editTodoBtn.disabled;
 	});
 };
 
@@ -58,6 +63,7 @@ const attachEventLitenersToProject = (projectElement) => {
 	// click for delete project
 	deleteProjectBtn.addEventListener('click', () => {
 		handleDeleteProject(projectID);
+		populateStorage('projects', projectManager.projects);
 	});
 };
 
@@ -75,6 +81,7 @@ const attachEventLitenersToAddTodoForm = (addTodoFormElement) => {
 	addTodoForm.addEventListener('submit', (e) => {
 		e.preventDefault();
 		handleAddTodo(addTodoForm, projectManager.currentProject);
+		populateStorage('projects', projectManager.projects);
 		hideModal();
 	});
 };
@@ -93,6 +100,7 @@ const attachEventLitenersToAddProjectForm = (addProjectFormElement) => {
 	addProjectForm.addEventListener('submit', (e) => {
 		e.preventDefault();
 		handleAddProject(addProjectForm);
+		populateStorage('projects', projectManager.projects);
 		hideModal();
 	});
 };
@@ -111,6 +119,7 @@ const attachEventLitenersToEditTodoForm = (editTodoFormElement, todoID) => {
 	editTodoForm.addEventListener('submit', (e) => {
 		e.preventDefault();
 		handleEditTodo(editTodoForm, todoID, projectManager.currentProject);
+		populateStorage('projects', projectManager.projects);
 		hideModal();
 	});
 };
