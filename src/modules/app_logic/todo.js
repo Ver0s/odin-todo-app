@@ -35,6 +35,9 @@ const Todo = (title, description, priority, dueDate, id = uuidv4()) => {
 		get id() {
 			return id;
 		},
+		set isDone(value) {
+			return (isDone = value);
+		},
 		get isDone() {
 			return isDone;
 		},
