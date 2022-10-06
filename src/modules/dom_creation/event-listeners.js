@@ -45,8 +45,6 @@ const attachEventLitenersToTodo = (todoElement) => {
 		currentTodo.toggleDone();
 		todoContent.classList.toggle('todo-done');
 		populateStorage('projects', projectManager.projects);
-		// deleteTodoBtn.disabled = !deleteTodoBtn.disabled;
-		// editTodoBtn.disabled = !editTodoBtn.disabled;
 	});
 };
 
