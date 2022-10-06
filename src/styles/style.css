@@ -293,7 +293,6 @@ main {
 /* ---------- ADD TODO ---------- */
 .modal {
 	position: fixed;
-	z-index: 1;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -301,6 +300,7 @@ main {
 	overflow: auto;
 	background-color: var(--modal-color);
 	padding: 0 2rem;
+	z-index: 9999;
 }
 
 .modal-content {
@@ -308,7 +308,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	max-width: 400px;
-	margin: 10% auto;
+	margin: 150px auto;
 	background-color: var(--main-white);
 	border-radius: var(--border-radius);
 }
@@ -376,7 +376,7 @@ main {
 		position: absolute;
 		top: 44px;
 		bottom: 0;
-		z-index: 999;
+		z-index: 100;
 	}
 
 	.editor {
