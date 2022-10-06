@@ -48,11 +48,11 @@ const renderTodos = (projectTodos) => {
 const setPriorityColor = (priority) => {
 	switch (priority) {
 		case 'high':
-			return 'red';
+			return 'priority-high';
 		case 'medium':
-			return 'orange';
+			return 'priority-medium';
 		case 'low':
-			return 'green';
+			return 'priority-low';
 		default:
 			break;
 	}
