@@ -16,18 +16,15 @@ const setProjectHeader = (projectName) => {
 const renderProjects = (projects) => {
 	const projectList = document.querySelector('.project-list');
 	// Condition is set to 1 here because of Home project
-	if (projects.length === 1) {
-		projectList.textContent = "You don't have any projects yet.";
-	} else {
-		projectList.replaceChildren();
-		projects.forEach((project) => {
-			// Prevent default project from appearing in unwanted place
-			if (project.title === 'Home') return;
-			const projectLi = renderProjectLi(project);
-			attachEventLitenersToProject(projectLi);
-			projectList.appendChild(projectLi);
-		});
-	}
+
+	projectList.replaceChildren();
+	projects.forEach((project) => {
+		// Prevent default project from appearing in unwanted place
+		if (project.title === 'Home') return;
+		const projectLi = renderProjectLi(project);
+		attachEventLitenersToProject(projectLi);
+		projectList.appendChild(projectLi);
+	});
 };
 
 export { setProjectHeader, renderProjects };
