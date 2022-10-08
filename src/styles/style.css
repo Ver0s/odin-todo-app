@@ -64,18 +64,18 @@ button img {
 	width: 20px;
 }
 
-.priority-high {
-	border-color: #cb3c34 !important;
+.round label.priority-high {
+	border-color: #cb3c34;
 	background-color: #faebea;
 }
 
-.priority-medium {
-	border-color: #e87e0c !important;
+.round label.priority-medium {
+	border-color: #e87e0c;
 	background-color: #fdf2e6;
 }
 
-.priority-low {
-	border-color: #46cb34 !important;
+.round label.priority-low {
+	border-color: #46cb34;
 	background-color: #d0edce;
 }
 
@@ -99,7 +99,7 @@ button img {
 
 .round input[type='checkbox']:checked + label {
 	background-color: var(--main-text);
-	border-color: var(--main-text) !important;
+	border-color: var(--main-text);
 }
 
 .round input[type='checkbox']:checked + label:after {
